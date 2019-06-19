@@ -6,30 +6,17 @@ import { compressImage } from './jimp.utils';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 
+  isLoading:boolean = false;
   imgUrl: SafeUrl;
-  UIAliveWitness: string = "";
 
-  constructor(private ds: DomSanitizer) {
+  constructor(private ds: DomSanitizer) {  }
 
-  }
-
-  ngOnInit() {
-    setInterval(() => {
-      this.UIAliveWitness += "."
-    }, 50)
+  ngOnInit() {    
     this.imgUrl = this.ds.bypassSecurityTrustUrl(UNCOMPRESSED_IMAGE);
-  }
-
-  compressWithWorker() {
-    const jimpWorker = new Worker('./jimp.worker', { type: 'module' });
-    jimpWorker.onmessage = ({ data }: { data: string }) => {
-      this.imgUrl = this.ds.bypassSecurityTrustUrl(data);
-    };
-    jimpWorker.postMessage(UNCOMPRESSED_IMAGE);
   }
 
   compress() {
@@ -42,5 +29,4 @@ export class AppComponent implements OnInit {
     this.imgUrl = this.ds.bypassSecurityTrustUrl(UNCOMPRESSED_IMAGE);
   }
 
-  title = 'jimp-webworker';
 }

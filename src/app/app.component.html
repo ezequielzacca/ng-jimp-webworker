@@ -1,12 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<span style="font-size: large; font-weight: bold">{{ UIAliveWitness }}</span>
+<div class="loader"></div>
 <div style="text-align:center">
   <button (click)="compress()">Compress</button>
   <button (click)="compressWithWorker()">Compress Worker</button>
   <button (click)="reset()">Reset</button>
   <img [src]="imgUrl">
 </div>
-
-
-
-<router-outlet></router-outlet>
