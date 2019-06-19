@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-import * as Jimp from "jimp";
+import * as Jimp from "jimp"; 
 
 addEventListener('message', async ({ data }: { data: string }) => {
   var compressedBase64 = await compressImage(data);
