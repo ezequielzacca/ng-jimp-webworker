@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
 
   compressWithWorker() {
     const jimpWorker = new Worker('./jimp.worker', { type: 'module' });
-    jimpWorker.onmessage = (img) => {
-      this.imgUrl = this.ds.bypassSecurityTrustUrl(img.data);
+    jimpWorker.onmessage = ({ data }: { data: string }) => {
+      this.imgUrl = this.ds.bypassSecurityTrustUrl(data);
     };
     jimpWorker.postMessage(UNCOMPRESSED_IMAGE);
   }
